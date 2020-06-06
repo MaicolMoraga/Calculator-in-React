@@ -13,7 +13,47 @@ class Calculator extends Component{
 
         this.evaluateColors = this.evaluateColors.bind(this);
         this.evaluateGrid   = this.evaluateGrid.bind(this);
+        this.buttonClick    = this.buttonClick.bind(this);
 
+      }
+
+      buttonClick(item){
+        var signs       = ["+", "-", "*", "/"];
+        var valDisplay  = 0;
+        var valEquation = '';
+  
+        if(item === '='){
+          valDisplay  = eval(this.state.equation);
+          valEquation = this.state.equation;
+        }else{
+          if((this.state.display === 0) && (this.state.equation.length === 0)){
+            if(!isNaN(item)){
+              valEquation = this.state.equation+item
+            }
+          }else{
+            if(signs.indexOf(item) > -1){
+              if(this.state.display > 0){
+                valEquation = this.state.display+item
+              }else{
+                valEquation = this.state.equation+item
+              }
+            }else{
+              if(!isNaN(item)){
+                if(this.state.display > 0){
+                  valEquation = this.state.display+item
+                }else{
+                  valEquation = this.state.equation+item
+                }
+              }
+            }
+          } 
+        }
+  
+        this.setState({
+          display: valDisplay,
+          equation: valEquation
+        });
+        
       }
 
       evaluateColors(item){
