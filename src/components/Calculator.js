@@ -20,24 +20,27 @@ class Calculator extends Component{
       }
 
       buttonClick(item){
-        var signs       = ["+", "-", "*", "/","."];
+        var signs       = ['+', '-', '*', '/','.'];
         var valDisplay  = 0;
         var valEquation = '';
-  
+        var last        = this.state.equation.substr(-1);
+
         if(item === '='){
-            if(this.state.equation.length > 0){
-                valDisplay  = eval(this.state.equation).toFixed(7);
+            if((this.state.equation.length > 0) && (signs.indexOf(last) === -1)){
+                valDisplay  = eval(this.state.equation);
                 valEquation = this.state.equation;
+
+                if(valDisplay%1 > 0){
+                    valDisplay = valDisplay.toFixed(10);
+                }
             }
         }else{
             if((this.state.display === 0) && (this.state.equation.length === 0)){
-                if(!isNaN(item)){
+                if(!isNaN(item) || item === '-'){
                     valEquation = this.state.equation+item
                 }
             }else{
                 if(signs.indexOf(item) > -1){
-                    var last = this.state.equation.substr(-1);
-
                     if(signs.indexOf(last) > -1){
                         var minusLast = this.state.equation.substring(0, this.state.equation.length -1);
                         valEquation = minusLast+item
