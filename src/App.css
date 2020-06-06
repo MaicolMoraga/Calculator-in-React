@@ -19,7 +19,7 @@
 
 /*Display result view*/
 #dis {
-  font-size: 3vw;
+  font-size: 3.5vw;
   padding-right: 10%;
   min-height: 80px;
 }
@@ -29,4 +29,12 @@
   padding-right: 10%; 
   font-size: 1.5vw;
   min-height: 30px;
+}
+
+/*Button equals*/
+#equals{
+  position: absolute;
+  height: 12em;
+  padding: 1.1em;
+  z-index: 1;
 }

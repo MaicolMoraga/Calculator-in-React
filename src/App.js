@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <Container>
         <Row className="justify-content-md-center mt-2">
-          <Calculator initialValue = {0} />
+          <Calculator initialValue = '' />
         </Row>
       </Container>
     );
