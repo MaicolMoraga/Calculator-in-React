@@ -20,7 +20,7 @@ class Calculator extends Component{
       }
 
       buttonClick(item){
-        var signs       = ["+", "-", "*", "/"];
+        var signs       = ["+", "-", "*", "/","."];
         var valDisplay  = 0;
         var valEquation = '';
   
