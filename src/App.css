@@ -13,20 +13,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: inherit;
+  text-align: end;
   font-family: digital;
 }
 
 /*Display result view*/
 #dis {
-  font-size: 3.5vw;
-  padding-right: 10%;
+  font-size: 3vw;
+  padding-right: 5%;
   min-height: 80px;
 }
 
 /*Equation videw*/
 #eq {
-  padding-right: 10%; 
+  padding-right: 5%; 
   font-size: 1.5vw;
   min-height: 30px;
 }

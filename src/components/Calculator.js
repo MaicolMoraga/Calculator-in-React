@@ -1,3 +1,5 @@
+/*eslint-disable no-eval */
+
 import React, { Component } from 'react';
 import {listButtons} from '../json/Buttons.json';
 import { Col, Card, CardBody, Row, Button } from 'reactstrap';
@@ -13,7 +15,60 @@ class Calculator extends Component{
 
         this.evaluateColors = this.evaluateColors.bind(this);
         this.evaluateGrid   = this.evaluateGrid.bind(this);
+        this.buttonClick    = this.buttonClick.bind(this);
 
+      }
+
+      buttonClick(item){
+        var signs       = ['+', '-', '*', '/','.'];
+        var valDisplay  = 0;
+        var valEquation = '';
+        var last        = this.state.equation.substr(-1);
+
+        if(item === '='){
+            if((this.state.equation.length > 0) && (signs.indexOf(last) === -1)){
+                valDisplay  = eval(this.state.equation);
+                valEquation = this.state.equation;
+
+                if(valDisplay%1 > 0){
+                    valDisplay = valDisplay.toFixed(10);
+                }
+            }
+        }else{
+            if((this.state.display === 0) && (this.state.equation.length === 0)){
+                if(!isNaN(item) || item === '-'){
+                    valEquation = this.state.equation+item
+                }
+            }else{
+                if(signs.indexOf(item) > -1){
+                    if(signs.indexOf(last) > -1){
+                        var minusLast = this.state.equation.substring(0, this.state.equation.length -1);
+                        valEquation = minusLast+item
+                    }else{
+                        if(this.state.display > 0){
+                            valEquation = this.state.display+item
+                        }else{
+                            valEquation = this.state.equation+item
+                        }
+                    }
+
+                }else{
+                    if(!isNaN(item)){
+                        if(this.state.display > 0){
+                            valEquation = this.state.display+item
+                        }else{
+                            valEquation = this.state.equation+item
+                        }
+                    }
+                }
+            } 
+        }
+  
+        this.setState({
+            display: valDisplay,
+            equation: valEquation
+        });
+        
       }
 
       evaluateColors(item){
@@ -49,7 +104,7 @@ class Calculator extends Component{
             (listButtons,i) => {
               return(
                 <Col key={i} xs={3} sm={3} md={3} className="mb-2 p-1">
-                  <Button id={listButtons.id} value={listButtons.value} size="lg" color={this.evaluateColors(listButtons.value)} className={this.evaluateGrid(listButtons.value)} >
+                  <Button id={listButtons.id} value={listButtons.value} size="lg" color={this.evaluateColors(listButtons.value)} className={this.evaluateGrid(listButtons.value)} onClick={this.buttonClick.bind(this,listButtons.value)}>
                     {listButtons.display}
                   </Button>
                 </Col>
