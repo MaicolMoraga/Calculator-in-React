@@ -132,7 +132,6 @@ class Calculator extends Component{
             </Col>
         );
     }
-
 }
 
 export default Calculator;
