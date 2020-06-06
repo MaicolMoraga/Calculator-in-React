@@ -6,7 +6,7 @@ import Calculator from './components/Calculator';
 class App extends Component {
   render() {
     return (
-      <Container>
+      <Container className="App">
         <Row className="justify-content-md-center mt-2">
           <Calculator initialValue = '' />
         </Row>
