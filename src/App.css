@@ -39,3 +39,19 @@
   padding: 1.1em;
   z-index: 1;
 }
+
+@media (max-width:450px){
+  /*Display result view responsive*/
+  #dis {
+    font-size: 14vw;
+  }
+
+  /*Equation videw responsive*/
+  #eq {
+    font-size: 5.5vw;
+  }
+
+  #clear{
+    padding: .5rem 0px;
+  }
+}
