@@ -1,3 +1,5 @@
+/*eslint-disable no-eval */
+
 import React, { Component } from 'react';
 import {listButtons} from '../json/Buttons.json';
 import { Col, Card, CardBody, Row, Button } from 'reactstrap';
