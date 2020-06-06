@@ -25,35 +25,45 @@ class Calculator extends Component{
         var valEquation = '';
   
         if(item === '='){
-          valDisplay  = eval(this.state.equation);
-          valEquation = this.state.equation;
+            if(this.state.equation.length > 0){
+                valDisplay  = eval(this.state.equation).toFixed(7);
+                valEquation = this.state.equation;
+            }
         }else{
-          if((this.state.display === 0) && (this.state.equation.length === 0)){
-            if(!isNaN(item)){
-              valEquation = this.state.equation+item
-            }
-          }else{
-            if(signs.indexOf(item) > -1){
-              if(this.state.display > 0){
-                valEquation = this.state.display+item
-              }else{
-                valEquation = this.state.equation+item
-              }
-            }else{
-              if(!isNaN(item)){
-                if(this.state.display > 0){
-                  valEquation = this.state.display+item
-                }else{
-                  valEquation = this.state.equation+item
+            if((this.state.display === 0) && (this.state.equation.length === 0)){
+                if(!isNaN(item)){
+                    valEquation = this.state.equation+item
                 }
-              }
-            }
-          } 
+            }else{
+                if(signs.indexOf(item) > -1){
+                    var last = this.state.equation.substr(-1);
+
+                    if(signs.indexOf(last) > -1){
+                        var minusLast = this.state.equation.substring(0, this.state.equation.length -1);
+                        valEquation = minusLast+item
+                    }else{
+                        if(this.state.display > 0){
+                            valEquation = this.state.display+item
+                        }else{
+                            valEquation = this.state.equation+item
+                        }
+                    }
+
+                }else{
+                    if(!isNaN(item)){
+                        if(this.state.display > 0){
+                            valEquation = this.state.display+item
+                        }else{
+                            valEquation = this.state.equation+item
+                        }
+                    }
+                }
+            } 
         }
   
         this.setState({
-          display: valDisplay,
-          equation: valEquation
+            display: valDisplay,
+            equation: valEquation
         });
         
       }
