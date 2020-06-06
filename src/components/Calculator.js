@@ -89,7 +89,7 @@ class Calculator extends Component{
             (listButtons,i) => {
               return(
                 <Col key={i} xs={3} sm={3} md={3} className="mb-2 p-1">
-                  <Button id={listButtons.id} value={listButtons.value} size="lg" color={this.evaluateColors(listButtons.value)} className={this.evaluateGrid(listButtons.value)} >
+                  <Button id={listButtons.id} value={listButtons.value} size="lg" color={this.evaluateColors(listButtons.value)} className={this.evaluateGrid(listButtons.value)} onClick={this.buttonClick.bind(this,listButtons.value)}>
                     {listButtons.display}
                   </Button>
                 </Col>
