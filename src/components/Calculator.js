@@ -19,32 +19,46 @@ class Calculator extends Component{
 
       }
 
+      /*Function that is executed when pressing a button, 
+      which evaluates whether to add a value to the equation, clean the display or deliver the result. */
       buttonClick(item){
+        /*The initial value and equation are declared, in addition to the signs that allow an equation to be made, 
+        in case of pressing "AC" the states are updated by the declared initial values.*/
         var signs       = ['+', '-', '*', '/','.'];
         var valDisplay  = 0;
         var valEquation = '';
         var last        = this.state.equation.substr(-1);
 
         if(item === '='){
+            /*In case of pressing the equal button, it is evaluated that an equation equals and 
+            that the equation is written correctly.*/
             if((this.state.equation.length > 0) && (signs.indexOf(last) === -1)){
                 valDisplay  = eval(this.state.equation);
                 valEquation = this.state.equation;
-
+                /*If the result contains too large a decimal number, they are limited to 10 characters.*/
                 if(valDisplay%1 > 0){
                     valDisplay = valDisplay.toFixed(10);
                 }
             }
         }else{
+            /*The initial value is evaluated as zero and there is no generated equation.*/
             if((this.state.display === 0) && (this.state.equation.length === 0)){
+                /*It is evaluated that the pressed button corresponds to a number or to the operator "minus" to enter a negative number, 
+                otherwise it does not allow starting an equation with an operator.*/
                 if(!isNaN(item) || item === '-'){
                     valEquation = this.state.equation+item
                 }
             }else{
+                /*The pressed button is evaluated as an operator.*/
                 if(signs.indexOf(item) > -1){
+                    /*It is evaluated that the last character of the equation is not an operator, 
+                    otherwise it replaces it with the new operator.*/
                     if(signs.indexOf(last) > -1){
                         var minusLast = this.state.equation.substring(0, this.state.equation.length -1);
                         valEquation = minusLast+item
                     }else{
+                        /*If there is an initial number, it is generated with an equation with said value plus the pressed operator, otherwise, 
+                        the operator is added to the existing equation.*/
                         if(this.state.display > 0){
                             valEquation = this.state.display+item
                         }else{
@@ -53,7 +67,10 @@ class Calculator extends Component{
                     }
 
                 }else{
+                    /*It is evaluated that the button pressed is a number, in case there is an initial number.*/
                     if(!isNaN(item)){
+                        /*In case there is an initial number, the number pressed is added to it, 
+                        otherwise it is added to the number already existing in the equation.*/
                         if(this.state.display > 0){
                             valEquation = this.state.display+item
                         }else{
@@ -63,7 +80,8 @@ class Calculator extends Component{
                 }
             } 
         }
-  
+
+        /*Once the action performed by the pressed button is evaluated, the equation and the result are shown in the views.*/
         this.setState({
             display: valDisplay,
             equation: valEquation
@@ -71,6 +89,7 @@ class Calculator extends Component{
         
       }
 
+      /*Returns the color according to the type of button to use.*/
       evaluateColors(item){
         var nameClase = '';
         var signs     = ["+", "-", "*", "/"];
@@ -87,7 +106,8 @@ class Calculator extends Component{
         
         return nameClase;
       }
-  
+      
+      /*Returns the bootstrap class of the style you want to use according to the button.*/
       evaluateGrid(item){
         var nameClase = '';
   
@@ -99,7 +119,7 @@ class Calculator extends Component{
       }
 
     render(){
-
+        /*Generate the buttons to use (numbers and operators) based on the Buttons.json file.*/
         const arrayButtons = this.state.listButtons.map(
             (listButtons,i) => {
               return(
@@ -111,7 +131,8 @@ class Calculator extends Component{
               )
             }
           );
-
+        /*Col id="View": Section where the equation made and its result are shown.*/
+        /*Row: Section where the equation made and its result are shown.*/
         return(
             <Col xs={12} sm={6} md={4}>
                 <Card className="Card" body outline color="primary">
