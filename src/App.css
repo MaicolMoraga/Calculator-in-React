@@ -45,20 +45,41 @@
 }
 
 @media (max-width:993px){
-  #clear{
-    padding: .5rem 0px !important;
+
+  .card-body{
+    padding: .6rem !important;
   }
 
   .btn-lg{
     padding: 0px !important;
   }
 
+  #clear{
+    padding: .5rem 0px !important;
+    font-size: .65rem !important;
+  }
+  
+  #equals{
+    height: 9em !important;
+  }
 }
 
 @media (max-width:450px){
+
+  .card-body{
+    padding: 1.25rem !important;
+  }
   
   .btn-lg{
     padding: .5rem 1rem !important;
+  }
+
+  #clear{
+    font-size: 1.25rem !important;
+  }
+
+  #equals{
+    height: 12em !important;
   }
 
 }
