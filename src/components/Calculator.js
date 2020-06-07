@@ -35,9 +35,14 @@ class Calculator extends Component{
             if((this.state.equation.length > 0) && (signs.indexOf(last) === -1)){
                 valDisplay  = eval(this.state.equation);
                 valEquation = this.state.equation;
-                /*If the result contains too large a decimal number, they are limited to 10 characters.*/
-                if(valDisplay%1 > 0){
-                    valDisplay = valDisplay.toFixed(10);
+                /*If the result contains too large a decimal number, they are limited of characters.*/
+                var str = valDisplay.toString();
+
+                if((valDisplay%1 > 0) && (str.length >= 10 )){
+                    var result  =  (Math.round( valDisplay * 100 ) / 100).toString();
+                    var array   = result.split('.');
+                    var fix     = array[0].length>8?(array[0].length):(9-array[0].length)
+                    valDisplay  = valDisplay.toFixed(fix);
                 }
             }
         }else{
@@ -109,7 +114,7 @@ class Calculator extends Component{
       
       /*Returns the bootstrap class of the style you want to use according to the button.*/
       evaluateGrid(item){
-        var nameClase = '';
+        var nameClase = 'btn-block';
   
         if(item !== '='){
             nameClase='btn-block';

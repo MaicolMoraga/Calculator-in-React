@@ -20,7 +20,7 @@
 
 /*Display result view*/
 #dis {
-  font-size: 3vw;
+  font-size: 3rem;
   padding-right: 5%;
   min-height: 80px;
 }
@@ -28,7 +28,7 @@
 /*Equation videw*/
 #eq {
   padding-right: 5%; 
-  font-size: 1.5vw;
+  font-size: 1.25rem;;
   min-height: 30px;
 }
 
@@ -36,22 +36,29 @@
 #equals{
   position: absolute;
   height: 12em;
-  padding: 1.1em;
+  width: 92%;
   z-index: 1;
 }
 
-@media (max-width:450px){
-  /*Display result view responsive*/
-  #dis {
-    font-size: 14vw;
-  }
+#clear{
+  padding: .5rem 0px;
+}
 
-  /*Equation videw responsive*/
-  #eq {
-    font-size: 5.5vw;
-  }
-
+@media (max-width:993px){
   #clear{
-    padding: .5rem 0px;
+    padding: .5rem 0px !important;
   }
+
+  .btn-lg{
+    padding: 0px !important;
+  }
+
+}
+
+@media (max-width:450px){
+  
+  .btn-lg{
+    padding: .5rem 1rem !important;
+  }
+
 }
